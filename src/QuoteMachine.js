@@ -30,9 +30,9 @@ class QuoteMachine extends Component {
         <div className="row ">
           <div className="col-md-6 mx-auto my-5">
             <div className="card text-center" id="quote-box">
-              <div className="card-header">
+              <div className="card-header bg-primary text-light">
                 <div className="card-title">
-                  <h3>Quote Machine</h3>
+                  <h3>Random Quote Machine</h3>
                 </div>
               </div>
               <div className="card-body">

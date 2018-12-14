@@ -2,13 +2,16 @@
   "name": "quote_machine",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://dmai90.github.io/random-quote-machine",
   "dependencies": {
     "bootstrap": "^4.1.3",
+    "gh-pages": "^2.0.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1"
   },
   "scripts": {
+    "deploy": "npm run build&&gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
