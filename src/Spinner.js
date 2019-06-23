@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Spinner = ({ color }) => {
   return (
@@ -6,6 +7,10 @@ const Spinner = ({ color }) => {
       <span className="sr-only">Loading...</span>
     </div>
   );
+};
+
+Spinner.propTypes = {
+  color: PropTypes.string.isRequired
 };
 
 export default Spinner;

@@ -32,22 +32,30 @@ class QuoteMachine extends Component {
   getNewQuote = async () => {
     this.setState({ ...this.state, loading: true, bgColor: this.getColor() });
 
-    const res = await fetch(
-      'https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json'
-    );
-    const { quotes } = await res.json();
+    try {
+      const res = await fetch(
+        'https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json'
+      );
+      const { quotes } = await res.json();
 
-    let number = Math.floor(Math.random() * quotes.length);
+      let number = Math.floor(Math.random() * quotes.length);
 
-    setTimeout(() => {
+      setTimeout(() => {
+        this.setState({
+          quote: {
+            content: quotes[number].quote,
+            author: quotes[number].author
+          },
+          loading: false
+        });
+      }, 500);
+    } catch (error) {
       this.setState({
-        quote: {
-          content: quotes[number].quote,
-          author: quotes[number].author
-        },
+        ...this.state,
+        quote: { content: 'SERVER ERROR', author: '' },
         loading: false
       });
-    }, 500);
+    }
   };
 
   render() {
@@ -84,7 +92,7 @@ class QuoteMachine extends Component {
                     </footer>
 
                     <div className="d-flex justify-content-center">
-                      {content.length > 0 && (
+                      {author.length > 0 && (
                         <a
                           href={`https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=${encoded}`}
                           id="tweet-quote"
@@ -101,7 +109,7 @@ class QuoteMachine extends Component {
                         onClick={this.getNewQuote}
                         id="new-quote"
                       >
-                        Click for a new quote
+                        New Quote
                       </button>
                     </div>
                   </div>
