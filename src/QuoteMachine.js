@@ -57,6 +57,8 @@ class QuoteMachine extends Component {
       bgColor
     } = this.state;
 
+    const encoded = encodeURIComponent(`"${content}" -${author}`);
+
     return (
       <div className="container">
         <div className="row ">
@@ -77,20 +79,25 @@ class QuoteMachine extends Component {
                     <blockquote className="blockquote" id="text">
                       <p>{content}</p>
                     </blockquote>
-                    <footer className="blockquote-footer" id="author">
+                    <footer className="blockquote-footer mb-2" id="author">
                       {author}
                     </footer>
 
-                    <div className="col mt-3">
-                      <a href="twitter.com/intent/tweet" id="tweet-quote">
-                        <i
-                          className={`fab fa-twitter fa-2x mr-3 text-${bgColor}`}
-                        />
-                      </a>
+                    <div className="d-flex justify-content-center">
+                      {content.length > 0 && (
+                        <a
+                          href={`https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=${encoded}`}
+                          id="tweet-quote"
+                        >
+                          <i
+                            className={`fab fa-twitter fa-2x mr-3 text-${bgColor}`}
+                          />
+                        </a>
+                      )}
 
                       <button
                         type="button"
-                        className={`btn btn-${bgColor}`}
+                        className={`btn btn-${bgColor} text-white`}
                         onClick={this.getNewQuote}
                         id="new-quote"
                       >
